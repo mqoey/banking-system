@@ -28,7 +28,8 @@ public class Main {
             System.out.println("5. Transfer Funds");
             System.out.println("6. Calculate Monthly Interest");
             System.out.println("7. View Account Balance");
-            System.out.println("8. Exit and Save");
+            System.out.println("8. Repay Loan");
+            System.out.println("9. Exit and Save");
 
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline character
@@ -158,6 +159,21 @@ public class Main {
                     break;
 
                 case 8:
+                    // Repay Loan
+                    System.out.println("Enter account number to repay loan: ");
+                    String loanAccountNumber = sc.nextLine();
+                    Account loanAccount = bank.findAccountByNumber(loanAccountNumber);
+
+                    if (loanAccount instanceof LoanAccount) {
+                        System.out.println("Enter repayment amount: ");
+                        double repaymentAmount = sc.nextDouble();
+                        ((LoanAccount) loanAccount).repayLoan(repaymentAmount);
+                        System.out.println("Loan repayment successful!");
+                    } else {
+                        System.out.println("Account not found or is not a loan account!");
+                    }
+
+                case 9:
                     // Exit and Save
                     bank.saveToFile(filePath);
                     System.out.println("Exiting and saving data. Goodbye!");

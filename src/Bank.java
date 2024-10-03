@@ -45,6 +45,16 @@ public class Bank implements IBank, Serializable {
         }
     }
 
+    @Override
+    public void repayLoan(String accountNumber, double amount) {
+        Account account = findAccountByNumber(accountNumber);
+        if (account instanceof LoanAccount) {
+            ((LoanAccount) account).repayLoan(amount);
+        } else {
+            System.out.println("Account is not a loan account.");
+        }
+    }
+
     // Save the current state of the bank to a file
     public void saveToFile(String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
