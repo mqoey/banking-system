@@ -5,9 +5,9 @@ public class Bank implements IBank, Serializable {
     @Serial
     private static final long serialVersionUID = 1L; // For version control of serialized objects
 
-    private String bankName;
+    private final String bankName;
     private final ArrayList<Customer> customers;
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
     public Bank(String bankName) {
         this.bankName = bankName;

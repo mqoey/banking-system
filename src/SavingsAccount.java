@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -34,9 +37,21 @@ public class SavingsAccount extends Account implements Serializable {
         Date date = new Date(); // Get the current date
         Transaction transaction = new Transaction(transactionID, getAccountNumber(), type, amount, date);
 
-        // Log transaction to a file or console for auditing
-        System.out.println("Transaction logged: " + transaction.getTransactionType() + " of amount " + amount + " on " + transaction.getDate());
-        // You can implement further logging mechanisms if necessary (e.g., saving to a file).
+        // Log the transaction
+        logTransactionToFile(transaction);
+    }
+
+    // Method to log transactions to a file
+    private void logTransactionToFile(Transaction transaction) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transaction_log.txt", true))) {
+            writer.write("Transaction Type: " + transaction.getTransactionType() + "\n");
+            writer.write("Account Number: " + transaction.getAccountNumber() + "\n");
+            writer.write("Amount: " + transaction.getAmount() + "\n");
+            writer.write("Date: " + new Date() + "\n");
+            writer.write("------------------------------\n");
+        } catch (IOException e) {
+            System.out.println("Error logging transaction: " + e.getMessage());
+        }
     }
 
     public double getInterestRate() {

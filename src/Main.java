@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Bank bank = null;
+        Bank bank;
 
         // Load bank data from file if it exists, or create a new bank
         System.out.println("Enter the name of the bank: ");
