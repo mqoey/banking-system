@@ -1,4 +1,11 @@
-public abstract class Account implements IAccount {
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
+
+public abstract class Account implements IAccount, Serializable {
     private final String accountNumber;
     protected double balance;
     private final Customer accountHolder;
@@ -40,7 +47,28 @@ public abstract class Account implements IAccount {
         return balance;
     }
 
-    protected abstract void logTransaction(String type, double amount);
+    // Log transactions to a file for all account types
+    protected void logTransaction(String type, double amount) {
+        String transactionID = UUID.randomUUID().toString(); // Generate a unique ID
+        Date date = new Date(); // Get the current date
+        Transaction transaction = new Transaction(transactionID, getAccountNumber(), type, amount, date);
+
+        logTransactionToFile(transaction);
+    }
+
+    // Method to log transactions to a file
+    private void logTransactionToFile(Transaction transaction) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transaction_log.txt", true))) {
+            writer.write("Transaction ID: " + transaction.getTransactionID() + "\n");
+            writer.write("Transaction Type: " + transaction.getTransactionType() + "\n");
+            writer.write("Account Number: " + transaction.getAccountNumber() + "\n");
+            writer.write("Amount: " + transaction.getAmount() + "\n");
+            writer.write("Date: " + transaction.getDate() + "\n");
+            writer.write("------------------------------\n");
+        } catch (IOException e) {
+            System.out.println("Error logging transaction: " + e.getMessage());
+        }
+    }
 
     @Override
     public abstract void applyInterest();

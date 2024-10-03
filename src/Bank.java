@@ -56,12 +56,32 @@ public class Bank implements IBank, Serializable {
     }
 
     // Save the current state of the bank to a file
-    public void saveToFile(String filename) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(this); // 'this' refers to the current Bank instance
-            System.out.println("Bank data saved successfully.");
-        } catch (IOException e) {
-            System.out.println("Error saving bank data: " + e.getMessage());
+    public void saveToFile(String filename) throws IOException {
+        File file = new File(filename);
+        File directory = file.getParentFile();
+
+        // Ensure the directory exists, create it if necessary
+        if (directory != null && !directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Directory created: " + directory.getPath());
+            } else {
+                throw new IOException("Failed to create directory: " + directory.getPath());
+            }
+        }
+
+        // If the file does not exist, create it
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getPath());
+            } else {
+                throw new IOException("Failed to create file: " + file.getPath());
+            }
+        }
+
+        // Save the current state of the bank to the file
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(this);  // 'this' refers to the current Bank object
+            System.out.println("Bank data saved successfully to " + filename);
         }
     }
 

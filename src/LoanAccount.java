@@ -23,9 +23,4 @@ public class LoanAccount extends Account {
             System.out.println("Amount exceeds loan balance.");
         }
     }
-
-    @Override
-    protected void logTransaction(String type, double amount) {
-        System.out.println("Transaction: " + type + ", Amount: " + amount);
-    }
 }

@@ -27,4 +27,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store!/src.zip
-!/src.zip
+/*.zip
+/data

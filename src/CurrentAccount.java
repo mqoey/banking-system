@@ -18,11 +18,6 @@ public class CurrentAccount extends Account {
     }
 
     @Override
-    protected void logTransaction(String type, double amount) {
-        System.out.println("Transaction: " + type + ", Amount: " + amount);
-    }
-
-    @Override
     public void applyInterest() {
         // No interest for current accounts
     }
