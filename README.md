@@ -24,17 +24,17 @@ The `Bank` class is responsible for managing customers and accounts. It implemen
 - Calculate interest for eligible accounts
 - Save and load the bank data
 
-### 2. `Customer`
-The `Customer` class represents a customer in the bank. Each customer has a unique ID, name, address, and a list of accounts. 
+### 2. `models.Customer`
+The `models.Customer` class represents a customer in the bank. Each customer has a unique ID, name, address, and a list of accounts. 
 
-### 3. `Account`
+### 3. `models.Account`
 An abstract class that represents a bank account. It holds the account number, the balance, and the customer who owns the account. It provides methods for depositing, withdrawing, and logging transactions.
 
-### 4. `SavingsAccount`
-The `SavingsAccount` class extends the `Account` class and represents a savings account. It includes an interest rate and a method for applying interest to the account.
+### 4. `models.SavingsAccount`
+The `models.SavingsAccount` class extends the `models.Account` class and represents a savings account. It includes an interest rate and a method for applying interest to the account.
 
-### 5. `Transaction`
-The `Transaction` class is used to represent individual transactions on an account, such as deposits, withdrawals, or interest application.
+### 5. `models.Transaction`
+The `models.Transaction` class is used to represent individual transactions on an account, such as deposits, withdrawals, or interest application.
 
 ## Getting Started
 

@@ -1,25 +1,24 @@
-import java.util.ArrayList;
+package models;
 
-public class Customer {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Customer implements Serializable {
     private final String customerID;
-    private final String name;
-    private final String address;
-    private final ArrayList<Account> accounts;
+    private final List<Account> accounts;
 
     public Customer(String customerID, String name, String address) {
         this.customerID = customerID;
-        this.name = name;
-        this.address = address;
         this.accounts = new ArrayList<>();
     }
 
-    // Getter for customerID
     public String getCustomerID() {
         return customerID;
     }
 
-    public void openAccount(Account a) {
-        accounts.add(a);
+    public void openAccount(Account account) {
+        accounts.add(account);
     }
 
     public Account getAccount(String accountNumber) {
@@ -31,12 +30,9 @@ public class Customer {
         return null;
     }
 
-    // Additional getter for name and address if needed
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
+    public void printAccounts() {
+        for (Account account : accounts) {
+            System.out.println("Account Number: " + account.getAccountNumber());
+        }
     }
 }
